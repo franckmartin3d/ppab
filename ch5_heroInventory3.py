@@ -63,7 +63,20 @@ input("n\Press the enter key to continue.")
 
 #Delete an element
 
+print("in the battle you lost your shield")
+del inventory[2]
+print("Your inventory is now")
+print(inventory)
 
+input("n\Press the enter key to continue.")
+
+#delete a slice
+print("Your crossbow and armor are stolen by thieves.")
+del inventory[:2]
+print("Your inventory is now")
+print(inventory)
+
+input("n\Press the enter key to continue.")
 
 
 
