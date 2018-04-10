@@ -1,6 +1,6 @@
 #franck
 #04/04/2018
-
+#finish on 10/04/2018
 # Hero's Inventory 3.0
 # Demonstrate lists
 
@@ -36,6 +36,44 @@ input("n\Press the enter key to continue.")
 
 #Concatenate two list (add them together)
 chest = ["gold", "booty"]
-print("You find a chest wich contains:")
+print("You find a chest witch contains:")
 print(chest)
 print("you add the contents of the chest to your inventory")
+inventory += chest
+print("Your inventory is now:")
+print(inventory)
+
+input("n\Press the enter key to continue.")
+
+#Assign by index
+print("you trade your sword for a crossbow")
+inventory[0] = "crossbow"
+print("Your inventory is now")
+print(inventory)
+
+input("n\Press the enter key to continue.")
+
+#assign by slice
+print("You use your gold and gems to buy an orb of future telling")
+inventory[4:6] = ["orb of future telling"]
+print("Your inventory is now")
+print(inventory)
+
+input("n\Press the enter key to continue.")
+
+#Delete an element
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
