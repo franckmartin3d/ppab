@@ -31,7 +31,9 @@ def display_instruct():
 
 
 def ask_yes_no(question):
-    """Ask a yes or no question"""
+    """Ask a yes or no question
+    Input:Question
+    Return: yes or no"""
     response = None
     while response not in ("y", "n"):
         response = input(question).lower()
@@ -39,15 +41,19 @@ def ask_yes_no(question):
 
 
 def ask_a_number(question, low, high):
-    """Ask for a number within a range"""
+    """Ask for a number within a range
+    Input : Question, low number, high number
+    Return: Response to question"""
     response = None
     while response not in range(low, high):
-        response = input(input(question))
+        response = int(input(question))
     return response
 
 
 def pieces():
-    """Determine if a player or computer goes first"""
+    """Determine if a player or computer goes first
+    input: None
+    Return: Computer 'x' or 'O' , Human 'X' or 'O' """
     go_first = ask_yes_no("Do you require the first move? (y/n): ")
     if go_first == "y":
         print("\nThen take the first move. You will need it.")
@@ -61,7 +67,9 @@ def pieces():
 
 
 def new_board():
-    """Create new game board"""
+    """Create new game board
+    input: nothing
+    Return: empty Board list"""
     board = []
     for square in range(NUM_SQUARES):
         board.append(EMPTY)
@@ -69,7 +77,10 @@ def new_board():
 
 
 def display_board(board):
-    """Display game board on screen"""
+    """Display game board on screen
+    Input: board list
+    Return: nothing """
+
     print("\n\t", board[0], "|", board[1], "|", board[2])
     print("\t", "---------")
     print("\t", board[3], "|", board[4], "|", board[5])
@@ -78,7 +89,9 @@ def display_board(board):
 
 
 def legal_moves(board):
-    """Create a list of legal moves"""
+    """Create a list of legal moves
+    Input: Board list
+    Retunr: Move list"""
     move = []
     for square in range(NUM_SQUARES):
         if board[square] == EMPTY:
@@ -87,7 +100,9 @@ def legal_moves(board):
 
 
 def winner(board):
-    """determine the game winner."""
+    """determine the game winner.
+    Input: Board list
+    Return: winner or TIE"""
     WAYS_TO_WIN = ((0, 1, 2),
                    (3, 4, 5),
                    (6, 7, 8),
@@ -96,7 +111,7 @@ def winner(board):
                    (2, 5, 8),
                    (0, 4, 8),
                    (2, 4, 6))
-
+    #check this
     for row in WAYS_TO_WIN:
         if board[row[0]] == board[row[1]] == board[row[2]] != EMPTY:
             winner = board[row[0]]
@@ -109,11 +124,15 @@ def winner(board):
 
 
 def human_move(board, human):
-    """Get human move."""
+    """Get human move.
+    Input: board list, human (x or o)
+    Return: move int """
+
     legal = legal_moves(board)
     move = None
     while move not in legal:
         move = ask_a_number("where will yu move ( o - 8):", 0, NUM_SQUARES)
+        print("infinite loop")
         if move not in legal:
             print("\n That square is already occupied, foolish human. Choose another. \n")
 
@@ -122,7 +141,10 @@ def human_move(board, human):
 
 
 def computer_move(board, computer, human):
-    """make the computer move."""
+    """make the computer move.
+    Input: board list, computer (x or o), human (x or o)
+    Return: move?
+    """
     # make a copy to work with since function will be changing the board list
     board = board[:]
 
@@ -142,7 +164,7 @@ def computer_move(board, computer, human):
 
     # if human can win, block that move
 
-    for move in legal_moves():
+    for move in legal_moves(board):
         board[move] = human
         if winner(board) == human:
             print(move)
@@ -166,7 +188,7 @@ def next_turn(turn):
         return X
 
 def congrat_winner(the_winner, computer, human):
-    """Congratulate the wwinner"""
+    """Congratulate the winner"""
     if the_winner != TIE:
         print(the_winner, "Won!\n")
     else:
@@ -186,12 +208,18 @@ def congrat_winner(the_winner, computer, human):
 
 def main():
     """main part of the code"""
+    #display the game instructions
     display_instruct()
+    #determine who goes first
     computer, human = pieces()
-    turn = X
+
+    turn = X #what is this line?
+
+    #create an empty tic-tac-toe board
     board = new_board()
     display_board(board)
 
+    #while nobody’s won and it’s not a tie
     while not winner(board):
         if turn == human:
             move = human_move(board, human)
@@ -199,7 +227,7 @@ def main():
         else:
             move = computer_move(board, computer, human)
             board[move] = computer
-        display_board()
+        display_board(board)
         turn = next_turn(turn)
 
     the_winner = winner(board)
