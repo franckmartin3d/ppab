@@ -21,7 +21,7 @@ def ask_yes_no(question):
 def ask_number(question, low, high):
     """Ask for a number within a range."""
     responce = None
-    while response not in range(low, high):
+    while responce not in range(low, high):
         responce = int(input(question))
     return responce
 
